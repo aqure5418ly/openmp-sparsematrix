@@ -31,7 +31,7 @@ int main()
             {
                 int j=matrix.column_indices[k];
                 double value = matrix.values[k];
-                C[j] += value * B[j];
+                C[i] += value * B[j];
             }
         }
     }
