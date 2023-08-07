@@ -2,7 +2,7 @@
 
 #define SIZE 2048  // 矩阵大小
 #define SPARSITY 0.05  // 最大稀疏度
-#define THREADS_NUM 64  // 线程数
+#define THREADS_NUM 16  // 线程数
 
 int main()
 {
