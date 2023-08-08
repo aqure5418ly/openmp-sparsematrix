@@ -12,9 +12,9 @@ int main() {
     double start, end;
 
     // 为A,B,C数组分配内存并进行内存对齐
-    if (posix_memalign((void**)&B, 32, SIZE * sizeof(double)) != 0 ||
-        posix_memalign((void**)&C, 32, SIZE * sizeof(double)) != 0 ||
-        posix_memalign((void**)&A, 32, SIZE * sizeof(double*)) != 0) 
+    if (posix_memalign((void**)&B, 64, SIZE * sizeof(double)) != 0 ||
+        posix_memalign((void**)&C, 64, SIZE * sizeof(double)) != 0 ||
+        posix_memalign((void**)&A, 64, SIZE * sizeof(double*)) != 0) 
     {  
         printf("Memory allocation failed\n");
         exit(1);
