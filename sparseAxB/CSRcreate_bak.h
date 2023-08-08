@@ -11,3 +11,4 @@ typedef struct {
 } CSR;
 
 CSR CSRcreate_bak(int size,double sparisty);
+int validateCSR(CSR matrix, int size);//—È÷§CSRæÿ’Û

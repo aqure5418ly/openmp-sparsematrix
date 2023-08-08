@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 编译源文件
-gcc -fopenmp sparseAxB.c CSRcreate.c -o run2 -lm
+gcc -fopenmp sparseAxB.c CSRcreate_bak.c -o run2 -lm
 
 # 检查编译是否成功
 if [ $? -ne 0 ]; then
@@ -20,4 +20,4 @@ done
 
 # 计算平均时间，并打印到控制台
 echo "Calculating average time..."
-awk '{ sum += $1; n++ } END { if (n > 0) print "Average Time =", sum / n; }' times2.txt
+awk '{ sum += $1; n++ } END { if (n > 0) print "Average Time =", sum / (n-1); }' times2.txt

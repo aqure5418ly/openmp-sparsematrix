@@ -1,4 +1,4 @@
-#include "CSRcreate.h"
+#include "CSRcreate_bak.h"
 
 #define SIZE 2048  // 矩阵大小
 #define SPARSITY 0.05  // 最大稀疏度
@@ -11,7 +11,14 @@ int main()
     double C[SIZE];
     omp_set_num_threads(THREADS_NUM);
     start = omp_get_wtime();  // 获取开始时间
-    CSR matrix = CSRcreate(SIZE,SPARSITY); //创建稀疏矩阵A
+    CSR matrix = CSRcreate_bak(SIZE,SPARSITY); //创建稀疏矩阵A
+    //end = omp_get_wtime();  // 获取结束时间
+    if (validateCSR(matrix, SIZE)) {
+        printf("The CSR structure is valid!\n");
+    } else {
+        printf("The CSR structure is NOT valid!\n");
+    }
+    //start = omp_get_wtime();  // 获取开始时间
     #pragma omp parallel
     {
         int thread_id = omp_get_thread_num();

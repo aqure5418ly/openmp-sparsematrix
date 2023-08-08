@@ -10,4 +10,5 @@ typedef struct {
     int *row_pointers;
 } CSR;
 
-CSR CSRcreate(int size,double sparisty);
+CSR CSRcreate(int size,double sparisty);//生成CSR矩阵
+int validateCSR(CSR matrix, int size);//验证CSR矩阵

@@ -11,6 +11,7 @@ CSR CSRcreate(int size,double sparisty)
     matrix.values = (double *)malloc(sizeof(double) * non_zero_elements);
     matrix.column_indices = (int *)malloc(sizeof(int) * non_zero_elements);
     matrix.row_pointers = (int *)calloc(size + 1, sizeof(int));
+    matrix.row_pointers[0] = 0;
     
     srand(time(NULL));//定义全局种子
     int count = 0;
@@ -41,7 +42,7 @@ CSR CSRcreate(int size,double sparisty)
                 }
             }
         }
-        matrix.row_pointers[i] = matrix.row_pointers[i-1]+count;        
+        matrix.row_pointers[i+1] = matrix.row_pointers[i-1]+count;        
     }
     printf("Values: ");
     for(int i = 0;i<10;i++)
@@ -55,4 +56,34 @@ CSR CSRcreate(int size,double sparisty)
     }
     printf("\n");
     return matrix;
+}
+
+int validateCSR(CSR matrix, int size) {
+    // 检查row_pointers
+    if (matrix.row_pointers[0] != 0) {
+        printf("Error: First element of row_pointers is not 0.\n");
+        return 0;
+    }
+
+    for (int i = 1; i <= size; i++) {
+        if (matrix.row_pointers[i] < matrix.row_pointers[i-1]) {
+            printf("Error: row_pointers is not non-decreasing at index %d.\n", i);
+            return 0;
+        }
+    }
+
+    // 检查column_indices
+    int totalElements = matrix.row_pointers[size];
+    for (int i = 0; i < size; i++) {
+        int startIdx = matrix.row_pointers[i];
+        int endIdx = matrix.row_pointers[i+1];
+        for (int j = startIdx; j < endIdx - 1; j++) {
+            if (matrix.column_indices[j] >= matrix.column_indices[j+1] || matrix.column_indices[j] < 0 || matrix.column_indices[j] >= size) {
+                printf("Error: column_indices are not unique or out of bounds for row %d.\n", i);
+                return 0;
+            }
+        }
+    }
+
+    return 1; // 结构正确返回1
 }
